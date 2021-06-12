@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../chains/.idea/chains.iml" filepath="$PROJECT_DIR$/../chains/.idea/chains.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../integer_programming/.idea/integer_programming.iml" filepath="$PROJECT_DIR$/../integer_programming/.idea/integer_programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tnac4o-master/.idea/tnac4o-master.iml" filepath="$PROJECT_DIR$/../tnac4o-master/.idea/tnac4o-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tsptw_private.iml" filepath="$PROJECT_DIR$/.idea/tsptw_private.iml" />
+    </modules>
+  </component>
+</project>

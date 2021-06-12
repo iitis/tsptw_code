@@ -1,7 +1,5 @@
 import argparse
 import os
-import sys
-
 from tsp_helpers import *
 
 # Generates the time windows where the window range is selected randomly between l_t and u_t
@@ -56,14 +54,14 @@ def complete(dir,n_instances, sym, n, l, u, l_t, u_t, txt):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-dir", type=str, default="instances",
-                        help="Name of the folder to store instances. Default is instances.")
-    parser.add_argument("-no", type=int, default=10,
-                        help="Number of instances to be generated. Default is 10.")
+    parser.add_argument("dir", type=str,
+                        help="Name of the folder to store instances.")
+    parser.add_argument("no", type=int,
+                        help="Number of instances to be generated.")
+    parser.add_argument("n", type=int,
+                        help="Number of cities including the depot.")
     parser.add_argument("-sym", action="store_true", default=False,
                         help="Whether the graph is symmetric or not. Default is False.")
-    parser.add_argument("-n", type=int, default=3,
-                        help="Number of cities including the depot. Default is 3.")
     parser.add_argument("-l", type=int, default=0,
                         help="Lower bound for entries in the cost matrix. Default is 0.")
     parser.add_argument("-u", type=int, default=10,
