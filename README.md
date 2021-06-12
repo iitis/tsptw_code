@@ -1,6 +1,6 @@
 # Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization
 
-Person responsible for data: Özlem Salehi (osalehi[at]iitis.p ).
+Person responsible for data: Özlem Salehi (osalehi[at]iitis.pl).
 
 The scripts necessary for generating the results provided in the "Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization".
 
