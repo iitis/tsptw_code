@@ -12,6 +12,7 @@ def plot_chain_lengths(model,dir):
     logical, chain_length, physical, size = defaultdict(lambda: 0), defaultdict(lambda: 0), defaultdict(
         lambda: 0), defaultdict(lambda: 0)
     for instance_name in os.listdir(dir):
+
         if "sample" in instance_name:
             data = pd.read_pickle(f"{dir}/{instance_name}")
             l = list(data["info"]['embedding_context']['embedding'].values())
