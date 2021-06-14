@@ -105,6 +105,8 @@ def plt_hists(ins, model, energyo, energyf, energynf,dir):
 
     plt.savefig(f"plots/hist_{ins}_{model}.pdf", bbox_inches='tight')
 
+    plt.close()
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
