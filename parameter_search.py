@@ -72,7 +72,7 @@ def search_edge(insdir, out, lp1, up1, lp2, up2):
         try:
             os.mkdir(f"{out}\{instance_name}")
         except OSError:
-            print("Creation of the directory failed")
+            print("Creation of the directory failed or directory already exists")
 
         ins = Instance_edge(instance_name, insdir)
         C = ins.C
@@ -111,25 +111,26 @@ def search_edge(insdir, out, lp1, up1, lp2, up2):
             # Store the results
 
             data.to_pickle(f"{out}/{instance_name}/{instance_name}_{index}")
-            print(data)
             index += 1
 
 
 def probs(out):
     for folder in os.listdir(out):
-        columns = ['A', 'E', 'p', 'mp']
-        results = pd.DataFrame(columns=columns)
+        if "summary" not in folder:
+            columns = ['A', 'E', 'p', 'mp']
+            results = pd.DataFrame(columns=columns)
 
-        for f in os.listdir(f"{out}/{folder}"):
-            data = pd.read_pickle(f"{out}/{folder}/{f}")
-            data.reset_index(drop=True, inplace=True)
-            data = data[data.cost!=100]
+            for f in os.listdir(f"{out}/{folder}"):
 
-            p = probability(data)
-            mp = min_prob(data)
+                data = pd.read_pickle(f"{out}/{folder}/{f}")
+                data.reset_index(drop=True, inplace=True)
+                data = data[data.cost!=100]
 
-            results = results.append(dict(zip(results.columns, [data.A[0], data.E[0],p,mp])), ignore_index=True)
-        write_npz_file(f"{out}/summary", folder, results=results)
+                p = probability(data)
+                mp = min_prob(data)
+
+                results = results.append(dict(zip(results.columns, [data.A[0], data.E[0],p,mp])), ignore_index=True)
+                write_npz_file(f"{out}/summary", folder, results=results)
 
 def find_params(out):
     dir = f"{out}/summary"
@@ -158,12 +159,9 @@ def find_params(out):
         dict = {}
 
     for folder in os.listdir(dir):
-        print(folder)
         soln = (df[df.instance == folder[:-4]].sort_values('mp', ascending=False).iloc[0])
         dict[folder[:-4]] = (soln.A, soln.E)
     write_npz_file(out, "params", dict = dict)
-    print(dict)
-
 
 if __name__ == "__main__":
 
@@ -203,7 +201,7 @@ if __name__ == "__main__":
     try:
         os.mkdir(f"{args.out}/summary")
     except OSError:
-        print("Creation of the directory failed")
+        print("Creation of the directory failed or directory already exists")
 
 
     BETA_RANGE = (args.lb, args.ub)
@@ -211,11 +209,11 @@ if __name__ == "__main__":
     NUM_SWEEPS = args.steps
     BETA_SCHEDULE_TYPE = args.schedule
 
-    '''
+
     if args.model == "e":
         search_edge(args.ins, args.out, args.lp1, args.up1, args.lp2, args.up2)
     elif args.model == "i":
         search_ilp(args.ins, args.out, args.lp1, args.up1, args.lp2, args.up2)
-    '''
-    #probs(args.out)
+
+    probs(args.out)
     find_params(args.out)
