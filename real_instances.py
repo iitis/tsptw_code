@@ -89,9 +89,6 @@ def num_var(dir, out):
         qubo_vars,qubo_slack,qubo_all = get_vars_instance( instance_name, dir, n, "Edge")
         hobo_vars,hobo_slack,hobo_all = get_vars_instance( instance_name, dir, n, "Node")
         ilp_vars,ilp_slack,ilp_all = get_vars_instance( instance_name, dir, n, "ILP")
-        print(qubo_vars,qubo_slack,qubo_all)
-        print(hobo_vars,hobo_slack,hobo_all)
-        print(ilp_vars,ilp_slack,ilp_all)
 
         write_npz_file(out, f"{instance_name}", n=n, qubo_vars = qubo_vars, hobo_vars = hobo_vars,
                        ilp_vars = ilp_vars, qubo_slack = qubo_slack, hobo_slack = hobo_slack,ilp_slack = ilp_slack,
@@ -130,8 +127,6 @@ def analysis(dir,plot):
 
     with open(f"{dir}/analysis", 'wb') as handle:
         pickle.dump(df, handle)
-
-    print(df)
 
     if plot:
         rc("text", usetex=True)
@@ -178,18 +173,18 @@ if __name__ == "__main__":
         print("Creation of the directory failed or directory already exists")
 
     try:
-        os.mkdir(f"{args.out}\{args.ins}_npz")
+        os.mkdir(f"{args.out}/{args.ins}_npz")
     except OSError:
         print("Creation of the directory failed or directory already exists")
 
     try:
-        os.mkdir(f"{args.out}\{args.ins}_count")
+        os.mkdir(f"{args.out}/{args.ins}_count")
     except OSError:
         print("Creation of the directory failed or directory already exists")
 
-    generate_npz(f"{args.insf}\{args.ins}",f"{args.out}\{args.ins}_npz",args.ext)
-    num_var(f"{args.out}\{args.ins}_npz",f"{args.out}\{args.ins}_count")
-    analysis(f"{args.out}\{args.ins}_count",args.plot)
+    generate_npz(f"{args.insf}/{args.ins}",f"{args.out}/{args.ins}_npz",args.ext)
+    num_var(f"{args.out}/{args.ins}_npz",f"{args.out}/{args.ins}_count")
+    analysis(f"{args.out}/{args.ins}_count",args.plot)
 
 
 

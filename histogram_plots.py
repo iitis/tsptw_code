@@ -15,7 +15,7 @@ def new_data_gen(dir):
 
     for instance_dir in os.listdir(dir):
         if "energy" not in instance_dir and "sample" not in instance_dir:
-            data = pd.read_pickle(f"{dir}\{instance_dir}")
+            data = pd.read_pickle(f"{dir}/{instance_dir}")
 
             k = [m.start() for m in re.finditer(r"_", instance_dir)][3]
             instance_dir = instance_dir[:k]
@@ -77,7 +77,6 @@ def plt_hists(ins, model, energyo, energyf, energynf,dir):
     plt.xlabel("Energy")
     plt.ylabel("Count")
 
-    print(d1,d2,d3)
     if d1.size> 0:
         plt_hist(ax,d1,h1,lab1,o_color,oe_color,e)
     if d2.size> 0:

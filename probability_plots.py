@@ -20,7 +20,7 @@ def calc_prob(model,dir,cities):
             if n==cities:
 
                 no = instance_dir[j+1:k]
-                data = pd.read_pickle(f"{dir}\{instance_dir}")
+                data = pd.read_pickle(f"{dir}/{instance_dir}")
 
                 oprob[no] = len(data[data.optimal == True]) / len(data)
                 fprob[no] = len(data[data.feasible == True]) / len(data)
