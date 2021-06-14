@@ -26,19 +26,23 @@ The folder named ```AFG``` contains the instances from the dataset presented in 
 To generate random instances, run the following command in the main directory:
 
 ```
-python tsptw_generator.py instances 10 3 -l 0 -u 10 -et 20 -lt 40
+python tsptw_generator.py instances 10 3 
 ```
-The generated output is stored in the npz format with the variables n (the number of cities), weight (cost matrix) and window (time-windows). ```instances``` is the name of the folder to store instances. ```10``` is the number of instances to be generated. ```3``` is the number of cities including the depot.
+
+ ```instances``` is the name of the folder to store instances. ```10``` is the number of instances to be generated. ```3``` is the number of cities including the depot. The command above uses the default values for the upper and lower bounds of the time windows and cost matrix. The default values are the values which are used to generate the instances used in the publication. 
+ 
+ The generated output is stored in the npz format with the variables n (the number of cities), weight (cost matrix) and window (time-windows).
 
 The details of the optional keywords are described below:
 
-```-l```: Lower bound for the entries in the cost matrix. Default is 0.
+```-l```: Lower bound for the entries in the cost matrix. Default is 1.
                         
 ```-u```: Upper bound for the entries in the cost matrix. Default is 10.
 
 ```-et```: Upper bound for the earliest start time. Default is 20.
 
 ```-lt```: Upper bound for the latest start time. Default is 40.
+
 
 If you want to generate symmetric instances please add the keyword ```-sym```. If you want to store the instances in the txt format as well, then add the keyword ```-txt```.
 
