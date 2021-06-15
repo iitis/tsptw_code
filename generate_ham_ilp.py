@@ -183,7 +183,7 @@ def generate_bqm_ilp(ins,P1,P2):
 # Return ising formulation
 def ising_ilp(ins,p1,p2):
     P1 = p1 * ins.C.max()
-    P2 = p2 * ins.C.max()
+    P2 = (1/p2) * ins.C.max()
 
     bqm = generate_bqm_ilp(ins,P1,P2)
     h, J, of = Instance_ilp.convert_and_scale(bqm)
