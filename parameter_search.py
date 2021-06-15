@@ -72,7 +72,8 @@ def search_edge(insdir, out, lp1, up1, lp2, up2):
         try:
             os.mkdir(f"{out}\{instance_name}")
         except OSError:
-            print("Creation of the directory failed or directory already exists")
+            print(f"Creation of the directory {out}\{instance_name} failed")
+            quit()
 
         ins = Instance_edge(instance_name, insdir)
         C = ins.C
@@ -196,12 +197,17 @@ if __name__ == "__main__":
     try:
         os.mkdir(args.out)
     except OSError:
-        print("Creation of the directory failed or directory already exists")
+        if os.path.isdir(args.out):
+            print(f"Directory {args.out} already exists. Try removing the directory.")
+        else:
+            print(f"Creation of the directory {args.out} failed")
+        quit()
 
     try:
         os.mkdir(f"{args.out}/summary")
     except OSError:
-        print("Creation of the directory failed or directory already exists")
+        print(f"Creation of the directory {args.out}/summary failed")
+        quit()
 
 
     BETA_RANGE = (args.lb, args.ub)
