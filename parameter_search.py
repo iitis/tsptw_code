@@ -131,15 +131,16 @@ def probs(out):
                 mp = min_prob(data)
 
                 results = results.append(dict(zip(results.columns, [data.A[0], data.E[0],p,mp])), ignore_index=True)
-                write_npz_file(f"{out}/summary", folder, results=results)
+
+                results.to_pickle(f"{out}/summary/{folder}")
 
 def find_params(out):
     dir = f"{out}/summary"
     columns = ['A', 'E', 'p', 'mp', 'instance', 'n']
     df = pd.DataFrame(columns=columns)
     for instance in os.listdir(dir):
-        data = load_npz_file(dir, instance[:-4], "results")
 
+        data = pd.read_pickle(f"{dir}/{instance}")
         n=0
         if "_0_3" in instance:
             n = 3
@@ -149,9 +150,9 @@ def find_params(out):
             n = 5
 
         ns = [[f"{n}"]] * len(data)
-        ins = [[f"{instance[:-4]}"]] * len(data)
+        ins = [[f"{instance}"]] * len(data)
 
-        data = load_npz_file(dir, instance[:-4], "results")
+
         data = np.append(data, ins, axis=1)
         data = np.append(data, ns, axis=1)
 
@@ -160,8 +161,8 @@ def find_params(out):
         dict = {}
 
     for folder in os.listdir(dir):
-        soln = (df[df.instance == folder[:-4]].sort_values('mp', ascending=False).iloc[0])
-        dict[folder[:-4]] = (float(soln.A), float(soln.E))
+        soln = (df[df.instance == folder].sort_values('mp', ascending=False).iloc[0])
+        dict[folder] = (float(soln.A), float(soln.E))
     with open(f"{out}/params", 'wb') as handle:
         pickle.dump(dict, handle)
 

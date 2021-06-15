@@ -88,14 +88,14 @@ To run experiments using a specific instance, please type the following command.
 python experiment.py instances dwave_results e qa -ins complete_0_3_0 -p1 1 -p2 50
 ``` 
 
-The above command uses the instance named ```complete_0_3_0.npz``` located inside the folder ```instances``` and uses quantum annealing and edge-based formulation to perform the experiments. The penalty parameters p1 is set to 1 and p2 is set to 50. Both the summary of experiment results and the output obtained from D-Wave is stored inside the folder named ```dwave_results```.
+The above command uses the instance named ```complete_0_3_0.npz``` located inside the folder ```instances``` and uses quantum annealing and edge-based formulation (type ```i``` for ILP formulation) to perform the experiments. The penalty parameters p1 is set to 1 and p2 is set to 50. Both the summary of experiment results and the output obtained from D-Wave is stored inside the folder named ```dwave_results```.
 
 To run the experiment for all the instances in a folder, instead of specifying instance name and the penalty parameters from the command line, you should provide the location and the name of the dictionary storing the instance names as the they keys and penalty parameters as the values as a npz file. 
 
 ```
 python experiment.py inst dwave_results i sa -dictf params -dict pdict
 ``` 
-```params``` is the folder storing the dictionary named ```pdict```. This time, ilp formulation is used with simulated annealing.
+```params``` is the folder storing the dictionary named ```pdict```. This time, ILP formulation is used with simulated annealing.
 
 For the simulated annealing experiments, the parameters ```-reads```, ```-steps```, ```-lb```, ```-ub``` and ```-schedule``` can be specified. For the quantum annealing experiments the following parameters can be used:
 
@@ -106,6 +106,16 @@ For the simulated annealing experiments, the parameters ```-reads```, ```-steps`
 ```-chain```: Chain strength. Default is 2.
 
 ### Plotting the results
+
+To plot the heat map of probabilities resulting from the parameter search, please type the following:
+
+```
+python  parameter_plots.py edge_params e mp
+```
+
+```edge_params``` is the name of the folder storing the results of the parameter search, ```e``` indicates that edge formulation is used (type ```i``` for ILP formulation), and ```mp``` indicates the the probability will be set to 0 if the lowest energy sample does not encode an optimal route (type ```p``` otherwise). If you want to plot a specific instance, us the following keyword:
+
+``` -ins ```:  Name of the instance.
 
 To plot the chain lengths, type the following:
 
@@ -125,7 +135,7 @@ To plot the histogram of energies for the experiment results you should use the 
 ```
 python histogram_plots.py e
 ``` 
-```e``` indicates that the edge formulation is used. All results are plotted which are located under the default folders ``data/dwave_results_edge``` and ```data/dwave_results_ilp``` depending on the selected formulation. You can also specify a specific result or a different folder using the following keywords.
+```e``` indicates that the edge-based formulation is used. All results are plotted which are located under the default folders ``data/dwave_results_edge``` and ```data/dwave_results_ilp``` depending on the selected formulation. You can also specify a specific result or a different folder using the following keywords.
 
 ``` -res```: Path of the folder containing the results.
 
