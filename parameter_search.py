@@ -17,7 +17,7 @@ def search_ilp(insdir, out, lp1, up1, lp2, up2):
 
         print("-------------------File ", instance_name, "is processed------------------")
         try:
-            os.mkdir(f"{out}\{instance_name}")
+            os.mkdir(f"{out}/{instance_name}")
         except OSError:
             print("Creation of the directory failed")
 
@@ -58,7 +58,7 @@ def search_ilp(insdir, out, lp1, up1, lp2, up2):
             data.loc[len(data)] = [True, True, opt_cost, energy, -1, 0, 0]
 
             # Store the results
-            data.to_pickle(f"{out}\{instance_name}\{instance_name}_{index}")
+            data.to_pickle(f"{out}/{instance_name}/{instance_name}_{index}")
             index += 1
 
 
@@ -70,9 +70,9 @@ def search_edge(insdir, out, lp1, up1, lp2, up2):
 
         print("-------------------File ", instance_name, "is processed------------------")
         try:
-            os.mkdir(f"{out}\{instance_name}")
+            os.mkdir(f"{out}/{instance_name}")
         except OSError:
-            print(f"Creation of the directory {out}\{instance_name} failed")
+            print(f"Creation of the directory {out}/{instance_name} failed")
             quit()
 
         ins = Instance_edge(instance_name, insdir)

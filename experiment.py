@@ -83,11 +83,11 @@ def store_data(sampleset, ins, p1, p2, model, alg, out, opt_cost, energy):
         filename = f"{ins.name}_{p1}_{p2}_{alg}_{TIME}"
     else:
         filename = f"{ins.name}_{p1}_{p2}_{alg}"
-    df.to_pickle(f"{out}\{filename}")
+    df.to_pickle(f"{out}/{filename}")
     sdf = sampleset.to_serializable()
-    with open(f"{out}\{filename}_sample", 'wb') as handle:
+    with open(f"{out}/{filename}_sample", 'wb') as handle:
         pickle.dump(sdf, handle)
-    with open(f"{out}\{filename}_energy", 'wb') as handle:
+    with open(f"{out}/{filename}_energy", 'wb') as handle:
         pickle.dump(energy, handle)
     return df
 
