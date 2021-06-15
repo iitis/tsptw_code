@@ -48,7 +48,7 @@ def exp(ins, model, alg, p1, p2):
         sampleset = sampler.sample_ising(h,J)
 
     opt_route, opt_cost = brute_force_tsptw(ins.C, ins.latest, ins.earliest)
-    x = route_to_array_edge(opt_route,ins)
+    x = route_to_array_edge(opt_route,ins) if model =="e" else route_to_array_ilp(opt_route, ins)
     energy = dimod.ising_energy(binary_to_spin(x), h, J)
 
     return sampleset, opt_cost, energy
@@ -64,12 +64,13 @@ def store_data(sampleset, ins, p1, p2, model, alg, out, opt_cost, energy):
             v, route, w, cost = check_solution_edge(soln, ins.n, ins.C, ins.earliest, ins.latest)
         elif model == "i":
             soln = array_to_soln_ilp(x, ins.n, ins.invalid)
+
             v, route, w, cost = check_solution_ilp(soln, ins.n, ins.C, ins.earliest, ins.latest)
 
         f = w and v
         o = cost == opt_cost and f
         results.append((x, route, cost, datum.energy, w, v, f, o))
-    print(results)
+
     df = pd.DataFrame(results)
     df.columns = ['sample', 'route', 'cost', 'energy', 'windows', 'valid', 'feasible', 'optimal']
 
@@ -96,8 +97,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("instances", type=str,
                         help="Name of the folder which stores the instances.")
-    parser.add_argument("out", type=str, default="instances",
-                        help="Name of the folder to store the results. Default is results.")
+    parser.add_argument("out", type=str,
+                        help="Name of the folder to store the results.")
     parser.add_argument("model", type=str, choices=["e", "i"],
                         help="Formulation to be used. Type e for edge and i for ILP.")
     parser.add_argument("alg", type=str, choices=["qa", "sa", "hyb"],
@@ -146,7 +147,11 @@ if __name__ == "__main__":
     try:
         os.mkdir(args.out)
     except OSError:
-        print("Creation of the directory failed")
+        if os.path.isdir(args.out):
+            print(f"Directory {args.out} already exists. Results may be overwritten.")
+        else:
+            print(f"Creation of the directory {args.out} failed.")
+            quit()
 
 
     if args.ins:
@@ -156,14 +161,14 @@ if __name__ == "__main__":
     else:
         for instance_name in os.listdir(args.instances):
             instance_name = instance_name[:-4]
-            ins = Instance_edge(instance_name, args.instances) if args.model == "e" else Instance_ilp(args.ins,
+            print("-----------------",instance_name, "is processed.-----------------")
+            ins = Instance_edge(instance_name, args.instances) if args.model == "e" else Instance_ilp(instance_name,
                                                                                                  args.instances)
-            fdict = load_npz_file(args.dictf,args.dict, "dict")
-            print(fdict,instance_name)
-            print(type(instance_name))
-            print(fdict[instance_name])
+
+            fdict = pd.read_pickle(f"{args.dictf}/{args.dict}")
             p1 = fdict[instance_name][0]
             p2 = fdict[instance_name][1]
+
             sampleset, opt_cost, energy = exp(ins, args.model, args.alg, p1, p2)
             store_data(sampleset, ins, p1, p2, args.model, args.alg, args.out, opt_cost, energy)
 

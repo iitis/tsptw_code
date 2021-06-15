@@ -161,8 +161,10 @@ def find_params(out):
 
     for folder in os.listdir(dir):
         soln = (df[df.instance == folder[:-4]].sort_values('mp', ascending=False).iloc[0])
-        dict[folder[:-4]] = (soln.A, soln.E)
-    write_npz_file(out, "params", dict = dict)
+        dict[folder[:-4]] = (float(soln.A), float(soln.E))
+    with open(f"{out}/params", 'wb') as handle:
+        pickle.dump(dict, handle)
+
 
 if __name__ == "__main__":
 
