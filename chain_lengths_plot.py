@@ -43,10 +43,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    try:
-        os.mkdir("plots")
-    except OSError:
-        print("Creation of the directory failed or directory already exists")
+    if not os.path.exists("plots"):
+        try:
+            os.mkdir("plots")
+        except OSError:
+            print("Creation of the directory plots failed.")
 
 
     df1 = plot_chain_lengths("Edge-based",args.rese)

@@ -120,10 +120,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    try:
-        os.mkdir("plots")
-    except OSError:
-        print("Creation of the directory failed or directory already exists")
+    if not os.path.exists("plots"):
+        try:
+            os.mkdir("plots")
+        except OSError:
+            print("Creation of the directory plots failed.")
 
     if args.res=="":
         if args.model =="e":

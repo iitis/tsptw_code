@@ -143,10 +143,11 @@ def analysis(dir,plot):
         plt.legend(["Edge-based", "ILP", "Node-based"])
         plt.yscale('log')
 
-        try:
-            os.mkdir("plots")
-        except OSError:
-            print("Creation of the directory failed or directory already exists")
+        if not os.path.exists("plots"):
+            try:
+                os.mkdir("plots")
+            except OSError:
+                print("Creation of the directory plots failed.")
 
         plt.savefig(f"plots/real_instances_vars.pdf", bbox_inches='tight')
 
@@ -170,17 +171,24 @@ if __name__ == "__main__":
     try:
         os.mkdir(args.out)
     except OSError:
-        print("Creation of the directory failed or directory already exists")
+        if os.path.isdir(args.out):
+            print(f"Directory {args.out} already exists. Try removing the directory.")
+        else:
+            print(f"Creation of the directory {args.out} failed.")
+        quit()
+
 
     try:
         os.mkdir(f"{args.out}/{args.ins}_npz")
     except OSError:
-        print("Creation of the directory failed or directory already exists")
+        print(f"Creation of the directory {args.out}/{args.ins}_npz failed.")
+        quit()
 
     try:
         os.mkdir(f"{args.out}/{args.ins}_count")
     except OSError:
-        print("Creation of the directory failed or directory already exists")
+        print(f"Creation of the directory {args.out}/{args.ins}_count failed.")
+        quit()
 
     generate_npz(f"{args.insf}/{args.ins}",f"{args.out}/{args.ins}_npz",args.ext)
     num_var(f"{args.out}/{args.ins}_npz",f"{args.out}/{args.ins}_count")
