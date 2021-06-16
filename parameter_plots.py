@@ -49,6 +49,8 @@ def penalty_search_plot(out,instance,mode,model):
     f.figure.set_figheight(3)
     f.figure.savefig(f"plots/params_{instance}_{model}_{mode}.pdf", bbox_inches='tight', dpi=f.figure.dpi)
 
+    plt.close()
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
