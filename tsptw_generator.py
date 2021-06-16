@@ -62,8 +62,8 @@ if __name__ == "__main__":
                         help="Number of cities including the depot.")
     parser.add_argument("-sym", action="store_true", default=False,
                         help="Whether the graph is symmetric or not. Default is False.")
-    parser.add_argument("-l", type=int, default=0,
-                        help="Lower bound for entries in the cost matrix. Default is 0.")
+    parser.add_argument("-l", type=int, default=1,
+                        help="Lower bound for entries in the cost matrix. Default is 1.")
     parser.add_argument("-u", type=int, default=10,
                         help="Upper bound for entries in the cost matrix. Default is 10.")
     parser.add_argument("-et", type=int, default=10,
