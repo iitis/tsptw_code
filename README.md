@@ -4,6 +4,8 @@ Person responsible for data: Özlem Salehi (osalehi[at]iitis.pl).
 
 The scripts necessary for generating the results provided in the "Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization".
 
+The code was tested under Windows. To set up the environment, please install the following packages: `numpy`, `dwave-ocean-sdk`, `pandas`, `qiskit`, `seaborn`.
+
 ## Data used in the publication
 
 Data used in the publication is located inside the data folder. The folder ```instances``` contains the instances. ```dwave_results_ilp``` and ```dwave_results_edge```contain the results of the experiments obtained from D-Wave. For an instance named ```complete_0_3_0```, there are 3 files:
