@@ -66,7 +66,7 @@ if __name__ == "__main__":
                         help="Lower bound for entries in the cost matrix. Default is 1.")
     parser.add_argument("-u", type=int, default=10,
                         help="Upper bound for entries in the cost matrix. Default is 10.")
-    parser.add_argument("-et", type=int, default=10,
+    parser.add_argument("-et", type=int, default=20,
                         help="Upper bound for the earliest start time. Default is 20.")
     parser.add_argument("-lt", type=int, default=40,
                         help="Upper bound for the latest start time. Default is 40.")
