@@ -140,7 +140,7 @@ def analysis(dir,plot):
 
         plt.ylabel("Logical variables")
         plt.xlabel("Number of cities")
-        plt.legend(["Edge-based", "ILP", "Node-based"])
+        plt.legend(["Edge-based", "Node-based", "ILP"])
         plt.yscale('log')
 
         if not os.path.exists("plots"):
@@ -168,6 +168,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    '''
     try:
         os.mkdir(args.out)
     except OSError:
@@ -176,6 +177,7 @@ if __name__ == "__main__":
         else:
             print(f"Creation of the directory {args.out} failed.")
         quit()
+
 
 
     try:
@@ -189,7 +191,7 @@ if __name__ == "__main__":
     except OSError:
         print(f"Creation of the directory {args.out}/{args.ins}_count failed.")
         quit()
-
+    '''
     generate_npz(f"{args.insf}/{args.ins}",f"{args.out}/{args.ins}_npz",args.ext)
     num_var(f"{args.out}/{args.ins}_npz",f"{args.out}/{args.ins}_count")
     analysis(f"{args.out}/{args.ins}_count",args.plot)
