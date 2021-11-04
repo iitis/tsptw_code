@@ -94,7 +94,7 @@ def plt_hists(ins, model, energyo, energyf, energynf,dir):
 
     df = [d1, d2, d3]
     legs = [o, f, nf]
-    arr = [legs[i] for i in range(len(df)) if df[i].size > 0]
+    arr = [legs[i] for i in range(len(df))]
 
     plt.legend(handles=arr)
 
