@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/376737392.svg)](https://zenodo.org/badge/latestdoi/376737392)
+
 # Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization
 
 Person responsible for data: Özlem Salehi (osalehi[at]iitis.pl).
@@ -20,6 +22,25 @@ Data used in the publication is located inside the data folder. The folder ```in
 The second file is the raw experiment output returned by D-Wave. Third file stores the energy of the bit assignment encoding the optimal route with no penalties, for the penalty parameters ```p1``` and ```p2```.
 
 The folder named ```AFG``` contains the instances from the dataset presented in [1].
+
+## Publication
+
+Ö. Salehi, A. Glos, J.A. Miszczak, *Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization*, Quantum Information Processing, Vol. 21 (2022), 67,
+  arXiv:[2106.09056](https://arxiv.org/abs/2106.09056) ),
+  DOI:[10.1007/s11128-021-03405-5](https://doi.org/10.1007/s11128-021-03405-5).
+
+```
+@article{salehi2022unconstrained,
+  title={Unconstrained binary models of the travelling salesman problem variants for quantum optimization},
+  author={Salehi, {\"O}zlem and Glos, Adam and Miszczak, Jaros{\l}aw Adam},
+  journal={Quantum Information Processing},
+  volume={21},
+  number={2},
+  pages={1--30},
+  year={2022},
+  publisher={Springer}
+}
+```
 
 ## Reproducing data
 
