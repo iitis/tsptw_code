@@ -26,7 +26,7 @@ The folder named ```AFG``` contains the instances from the dataset presented in 
 ## Publication
 
 Ö. Salehi, A. Glos, J.A. Miszczak, *Unconstrained Binary Models of the Travelling Salesman Problem Variants for Quantum Optimization*, Quantum Information Processing, Vol. 21 (2022), 67,
-  arXiv:[2106.09056](https://arxiv.org/abs/2106.09056) ),
+  arXiv:[2106.09056](https://arxiv.org/abs/2106.09056),
   DOI:[10.1007/s11128-021-03405-5](https://doi.org/10.1007/s11128-021-03405-5).
 
 ```
@@ -38,7 +38,8 @@ The folder named ```AFG``` contains the instances from the dataset presented in 
   number={2},
   pages={1--30},
   year={2022},
-  publisher={Springer}
+  publisher={Springer},
+  doi={10.1007/s11128-021-03405-5}
 }
 ```
 
